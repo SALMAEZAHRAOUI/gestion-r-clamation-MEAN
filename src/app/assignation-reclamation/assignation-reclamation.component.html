@@ -1,0 +1,92 @@
+<!-- Layout principal avec sidebar -->
+<div  class="layout">
+ <!-- Sidebar -->
+ <aside class="sidebar">
+  <div class="sidebar-header">
+    
+    <div>
+      <h2 class="title">Admin</h2>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <a (click)="home()">
+      <i class="fas fa-home"></i> Accueil
+    </a>
+    <a (click)="goToAddUser()">
+      <i class="fas fa-user-plus"></i> Ajouter un utilisateur
+    </a>
+    <a (click)="goToListUsers()">
+      <i class="fas fa-users"></i> Liste des utilisateurs
+    </a>
+    <a (click)="listreclamation()">
+      <i class="fas fa-file-alt"></i> Liste des réclamations
+    </a>
+    <a (click)="assignation()">
+      <i class="fas fa-tasks"></i> Assignation
+    </a>
+    <a (click)="listassignation()">
+      <i class="fas fa-tasks"></i> Liste des  Assignation
+    </a>
+    <a (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i> Se déconnecter
+    </a>
+  </nav>
+  
+</aside>
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">Assignation des Réclamations</h2>
+
+  <div *ngIf="reclamations.length === 0">
+    <p class="text-center">Aucune réclamation disponible pour l’assignation.</p>
+  </div>
+
+  <div *ngIf="reclamations.length > 0" class="table-responsive">
+    <table class="table table-bordered table-hover align-middle shadow-sm">
+      <thead class="table-dark text-center">
+        <tr>
+          <th scope="col">Titre</th>
+          <th scope="col">Commune</th>
+          <th scope="col">Objectif</th>
+          <th scope="col">Date d’envoi</th>
+          <th scope="col">Statut</th>
+          <th scope="col">Agent</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reclamation of reclamations">
+          <td>{{ reclamation.titre }}</td>
+          <td>{{ reclamation.commune?.nom }}</td>
+          <td>{{ reclamation.objectif }}</td>
+          <td>{{ reclamation.dateEnvoi | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <span [ngClass]="{
+              'badge bg-warning text-dark': reclamation.validationAgent === 'non défini',
+              'badge bg-success': reclamation.validationAgent === 'validée',
+              'badge bg-danger': reclamation.validationAgent === 'refusée'
+            }">
+              {{ reclamation.validationAgent }}
+            </span>
+          </td>
+          <td>
+            <label for="agentSelect-{{ reclamation._id }}" class="form-label fw-bold">Agent à assigner :</label>
+  <select class="form-select"
+          id="agentSelect-{{ reclamation._id }}"
+          [(ngModel)]="selectedAgents[reclamation._id]">
+    <option [ngValue]="null" disabled selected hidden>-- Choisir un agent --</option>
+    <option *ngFor="let agent of agents" [ngValue]="agent._id">
+      {{ agent.username }}
+    </option>
+  </select>
+          </td>
+          <td class="text-center">
+            <button class="btn btn-sm btn-primary"
+                    (click)="assignerAgent(reclamation._id)">
+              <i class="bi bi-person-plus-fill me-1"></i> Assigner
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

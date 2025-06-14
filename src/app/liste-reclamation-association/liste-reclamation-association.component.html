@@ -1,0 +1,66 @@
+<div class="page-container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h4>Menu</h4>
+    </div>
+    <nav>
+      <ul>
+        <li (click)="home()">
+          <i class="fas fa-home"></i> Accueil
+        </li>
+        <li (click)="envoyer()">
+          <i class="fas fa-paper-plane"></i> Envoyer une réclamation
+        </li>
+        <li (click)="mesreclmation()">
+          <i class="fas fa-list"></i> Mes réclamations
+        </li>
+        <li (click)="chatbot()">
+          <i class="fas fa-comments"></i> Chatbot
+        </li>
+        <li (click)="logout()">
+          <i class="fas fa-sign-out-alt"></i> Se déconnecter
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Contenu principal -->
+  <div class="container">
+    <h2> Liste de mes réclamations</h2>
+
+    <div *ngIf="reclamations.length === 0">
+      Aucune réclamation trouvée.
+    </div>
+
+    <table *ngIf="reclamations.length > 0" class="reclamation-table">
+      <thead>
+        <tr>
+          <th>Titre</th>
+          <th>Objectif</th>
+          <th>Commune</th>
+          <th>Date</th>
+          <th>Statut Agent</th>
+          <th>Motif du refus</th>
+          <th>Email de l'agent</th> 
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rec of reclamations">
+          <td>{{ rec.titre }}</td>
+          <td>{{ rec.objectif }}</td>
+          <td>{{ rec.commune?.nom || 'Non spécifiée' }}</td>
+          <td>{{ rec.dateEnvoi | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ rec.validationAgent }}</td>
+          <td>
+            <span *ngIf="rec.motifRefus; else noRefus">{{ rec.motifRefus }}</span>
+            <ng-template #noRefus>—</ng-template>
+          </td>
+          <td>
+            {{ rec.agentId?.email || '—' }} <!-- ✅ Affichage de l'email de l'agent -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

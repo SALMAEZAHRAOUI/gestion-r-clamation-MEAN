@@ -1,0 +1,90 @@
+<!-- Layout principal avec sidebar -->
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div>
+        <h2 class="title">Admin</h2>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a (click)="home()">
+        <i class="fas fa-home"></i> Accueil
+      </a>
+      <a (click)="goToAddUser()">
+        <i class="fas fa-user-plus"></i> Ajouter un utilisateur
+      </a>
+      <a (click)="goToListUsers()">
+        <i class="fas fa-users"></i> Liste des utilisateurs
+      </a>
+      <a (click)="listreclamation()">
+        <i class="fas fa-file-alt"></i> Liste des réclamations
+      </a>
+      <a (click)="assignation()">
+        <i class="fas fa-tasks"></i> Assignation
+      </a>
+      <a (click)="listassignation()">
+        <i class="fas fa-tasks"></i> Liste des Assignation
+      </a>
+      <a (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i> Se déconnecter
+      </a>
+    </nav>
+  </aside>
+
+  <div class="main-content">
+    <h2>Liste des réclamations</h2>
+
+    <!-- Filtre par commune -->
+    <div class="filter-commune" style="margin-bottom: 20px;">
+      <label for="communeInput">Filtrer par commune :</label>
+<input id="communeInput" type="text" [(ngModel)]="searchCommune" (input)="filterByCommune()" placeholder="Tapez le nom de la commune" />
+
+    </div>
+    <div style="margin-bottom: 20px;">
+      <button class="btn btn-success me-2" (click)="exportToExcel()">📥 Exporter en Excel</button>
+      <button class="btn btn-danger" (click)="exportToPDF()">📄 Exporter en PDF</button>
+    </div>
+    
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Objectif</th>
+            <th>Commune</th>
+            <th>Provenance</th>
+            <th>Date d'envoi</th>
+            <th>Statut</th>
+            <th>Fichier</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Remplace ici "reclamations" par "filteredReclamations" pour afficher la liste filtrée -->
+          <tr *ngFor="let r of filteredReclamations">
+            <td>{{ r.titre }}</td>
+            <td>{{ r.objectif }}</td>
+            <td>{{ r.commune?.nom }}</td>
+            <td>
+              <div *ngIf="r.associationId">
+                Association : {{ r.associationId.email }}<br>
+                <ul *ngIf="r.membres?.length">
+                  <li *ngFor="let m of r.membres">{{ m.nom }} {{ m.prenom }} ({{ m.cin }})</li>
+                </ul>
+              </div>
+              <div *ngIf="!r.associationId && r.citoyenId">
+                Citoyen : {{ r.citoyenId.email }}
+              </div>
+            </td>
+            <td>{{ r.dateEnvoi | date: 'short' }}</td>
+            <td>{{ r.validationAgent }}</td>
+            <td>
+              <a [href]="'http://localhost:5000/uploads/' + r.fichierPath" target="_blank">Télécharger</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

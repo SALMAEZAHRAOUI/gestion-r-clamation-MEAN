@@ -1,0 +1,40 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+    <h2>📂 Courriers</h2>
+    <button class="logout-button" (click)="logout()">Se déconnecter</button>
+  </div>
+
+  <div *ngIf="isLoading">Chargement en cours...</div>
+
+  <div *ngIf="!isLoading && courriers.length === 0" class="empty">
+    Aucun courrier trouvé.
+  </div>
+
+  <div *ngIf="!isLoading && courriers.length > 0" class="table-responsive">
+    <table class="courrier-table">
+      <thead>
+        <tr>
+          <th>Sujet</th>
+          <th>Responsable</th>
+          <th>Historique</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let courrier of courriers">
+          <td>{{ courrier.sujet }}</td>
+          <td>{{ courrier.responsableId?.username || 'Non affecté' }}</td>
+          <td>
+            <ul *ngIf="courrier.historique?.length > 0">
+              <li *ngFor="let h of courrier.historique">
+                {{ h.organisation }} - {{ h.numeroReference }} - {{ h.date | date:'shortDate' }} - {{ h.type }}
+              </li>
+            </ul>
+            <em *ngIf="!courrier.historique || courrier.historique.length === 0">
+              Aucune étape historique
+            </em>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

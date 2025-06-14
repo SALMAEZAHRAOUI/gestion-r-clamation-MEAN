@@ -1,0 +1,46 @@
+<!-- Layout principal avec sidebar -->
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="admin-icon">🛡️</div>
+      <div>
+        <h2>Admin</h2>
+        <p class="user-email"></p>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a (click)="goToAddUser()">👤 Ajouter un utilisateur</a>
+      <a (click)="goToListUsers()">📋 Liste des utilisateurs</a>
+      <a (click)="goToaddcollier()">📦 Ajouter un courrier</a>
+      <a (click)="goToassigncollier()">🔗 Assigner un  courrier</a>
+      <a (click)="goToListcollier()">📁 Liste des  courriers</a>
+      <a class="logout" (click)="logout()">🚪 Se déconnecter</a>
+    </nav>
+  </aside>
+
+  <!-- Contenu principal -->
+  <main class="main-content">
+    <h3>Affecter un responsable à un courrier</h3>
+
+    <div>
+      <label>Choisir un courrier :</label>
+      <select [(ngModel)]="selectedCourrierId">
+        <option value="" disabled selected>-- Sélectionner --</option>
+        <option *ngFor="let c of courriers" [value]="c._id">{{ c.sujet }}</option>
+      </select>
+    </div>
+    
+    <div>
+      <label>Choisir un responsable :</label>
+      <select [(ngModel)]="selectedResponsableId">
+        <option value="" disabled selected>-- Sélectionner --</option>
+        <option *ngFor="let u of users" [value]="u._id">{{ u.username }}</option>
+      </select>
+    </div>
+    
+    <button (click)="affecter()">Affecter</button>
+    
+  </main>
+</div>

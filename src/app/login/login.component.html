@@ -1,0 +1,30 @@
+<div class="login-container container mt-5">
+  <h2 class="text-center mb-4">Connexion</h2>
+
+  <form (submit)="onLogin(); $event.preventDefault()" class="border p-4 rounded shadow-sm bg-light">
+    <div class="form-group mb-3">
+      <label for="email">Email</label>
+      <input type="email" [(ngModel)]="email" name="email" id="email" class="form-control" required placeholder="Entrez votre email" />
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="password">Mot de passe</label>
+      <input type="password" [(ngModel)]="password" name="password" id="password" class="form-control" required placeholder="Entrez votre mot de passe" />
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+
+    <div *ngIf="errorMessage" class="mt-3 text-danger text-center">
+      {{ errorMessage }}
+    </div>
+  </form>
+
+  <ul class="options-list mt-4">
+    <li (click)="registerAssociation()">
+      <i class="fas fa-user-plus"></i> S'enregistrer comme Association
+    </li>
+    <li (click)="registerCitoyen()">
+      <i class="fas fa-user-plus"></i> S'enregistrer comme Citoyen
+    </li>
+  </ul>
+</div>

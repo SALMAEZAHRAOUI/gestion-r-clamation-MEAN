@@ -1,0 +1,71 @@
+<!-- Layout principal avec sidebar -->
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="admin-icon">🛡️</div>
+      <div>
+        <h2>Admin</h2>
+        <p class="user-email"></p>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a (click)="goToAddUser()">👤 Ajouter un utilisateur</a>
+      <a (click)="goToListUsers()">📋 Liste des utilisateurs</a>
+      <a (click)="goToaddcollier()">📦 Ajouter un  courrier</a>
+      <a (click)="goToassigncollier()">🔗 Assigner un  courrier</a>
+      <a (click)="goToListcollier()">📁 Liste des  courriers</a>
+      <a class="logout" (click)="logout()">🚪 Se déconnecter</a>
+    </nav>
+  </aside>
+
+  <!-- Contenu principal -->
+  <main class="main-content">
+    <h2>📂 Liste des courriers</h2>
+
+    <!-- Filtre par sujet -->
+    <input
+      type="text"
+      [(ngModel)]="searchSubject"
+      (ngModelChange)="filterCourriers()"
+      placeholder="Filtrer par sujet"
+      class="filter-input"
+    />
+    
+ 
+    <!-- Tableau des courriers -->
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Sujet</th>
+      <th>Responsable</th>
+      <th>Historique</th>
+      <th>Actions</th> <!-- Colonne Actions pour ajouter le bouton "Modifier" -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let courrier of filteredCourriers">
+      <td>{{ courrier.sujet }}</td>
+      <td>
+        <span *ngIf="courrier.responsableId">{{ courrier.responsableId.username }}</span>
+        <span *ngIf="!courrier.responsableId">Non affecté</span>
+      </td>
+      <td>
+        <ul>
+          <li *ngFor="let h of courrier.historique">
+            {{ h.organisation }} - {{ h.numeroReference }} - {{ h.date | date: 'shortDate' }} -{{ h.type }}
+          </li>
+        </ul>
+      </td>
+      <td>
+        <button mat-button (click)="openEditModal(courrier)">Modifier</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div style="margin-bottom: 15px;">
+  <button mat-raised-button color="accent" (click)="exportToPDF()">Exporter PDF</button>
+</div>
+  </main>
+</div>

@@ -1,0 +1,33 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h4>Bonjour</h4>
+  </div>
+  <nav>
+    <ul>
+      <li (click)="home()">
+        <i class="fas fa-home"></i> Accueil
+      </li>
+      <li (click)="listreclamation()">
+        <i class="fas fa-list"></i> Voir les réclamations
+      </li>
+      <li (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i> Déconnexion
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<div class="container">
+  <div class="dashboard-container">
+    <mat-card>
+      <mat-card-title>Tableau de bord des réclamations par type</mat-card-title>
+      <mat-card-content>
+        <canvas baseChart
+                [data]="chartByTypeData"
+                [options]="chartOptions"
+                [type]="'bar'">
+        </canvas>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

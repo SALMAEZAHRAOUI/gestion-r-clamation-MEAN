@@ -1,0 +1,57 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h4>Menu</h4>
+  </div>
+  <nav>
+    <ul>
+      <li (click)="home()">
+        <i class="fas fa-home"></i> Accueil
+      </li>
+      <li (click)="envoyer()">
+        <i class="fas fa-paper-plane"></i> Envoyer une réclamation
+      </li>
+      <li (click)="chatbot()">
+        <i class="fas fa-comments"></i> Chatbot
+      </li>
+      <li (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i> Se déconnecter
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<div class="main-content">
+  <form (ngSubmit)="envoyerReclamation()" enctype="multipart/form-data">
+    <div>
+      <label for="titre">Titre :</label>
+      <input type="text" [(ngModel)]="titre" name="titre" required placeholder="Ex : Dégradation de la route" />
+    </div>
+
+    <div>
+      <label for="objectif">Objectif :</label>
+      <textarea [(ngModel)]="objectif" name="objectif" required placeholder="Décrire brièvement l’objectif..."></textarea>
+    </div>
+
+    <div>
+      <label for="commune">Commune :</label>
+      <select [(ngModel)]="commune" name="commune" required>
+        <option value="" disabled selected>-- Sélectionner une commune --</option>
+        <option *ngFor="let com of communesList" [value]="com._id">{{ com.nom }}</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="fichier">Fichier Réclamation (PDF/Word) :</label>
+      <input type="file" (change)="onFileSelected($event)" required />
+    </div>
+
+    <div>
+      <label for="fichierMembres">Fichier Membres (Excel) :</label>
+      <input type="file" (change)="onFichierMembresSelected($event)" required />
+    </div>
+
+    <button type="submit" [disabled]="envoiEnCours">
+      {{ envoiEnCours ? 'Envoi en cours...' : ' nvoyer la Réclamation' }}
+    </button>
+  </form>
+</div>

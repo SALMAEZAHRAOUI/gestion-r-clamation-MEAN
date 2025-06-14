@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartCampus – Espace Étudiant</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f2f5;
+      color: #333;
+    }
+
+    header {
+      background-color: #1a237e;
+      color: white;
+      padding: 25px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    header p {
+      margin-top: 8px;
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      padding: 40px 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background-color: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .card h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #1a237e;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #1a237e;
+      color: white;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>SmartCampus – Espace Étudiant</h1>
+  <p>Bienvenue, Salma Assiya | Licence ISITW</p>
+</header>
+
+<div class="container">
+  <div class="card">
+    <h2>📊 Mes Notes</h2>
+    <p>Consultez vos résultats académiques par semestre.</p>
+  </div>
+
+  <div class="card">
+    <h2>📝 Réclamations</h2>
+    <p>Envoyez une demande : bourse, correction note, identité...</p>
+  </div>
+
+  <div class="card">
+    <h2>📄 Documents</h2>
+    <p>Téléchargez vos attestations et conventions de stage.</p>
+  </div>
+
+  <div class="card">
+    <h2>📅 Emploi du temps</h2>
+    <p>Visualisez vos horaires de cours et groupes TP/TD.</p>
+  </div>
+
+  <div class="card">
+    <h2>📬 Réponses Administration</h2>
+    <p>Consultez le suivi de vos demandes et réponses reçues.</p>
+  </div>
+
+  <div class="card">
+    <h2>📁 Stage PFE / S4</h2>
+    <p>Déposez votre rapport ou attestation de stage en ligne.</p>
+  </div>
+
+  <div class="card">
+    <h2>📚 Cours et modules</h2>
+    <p>Accédez aux supports de cours et anciens examens.</p>
+  </div>
+
+  <div class="card">
+    <h2>📢 Annonces</h2>
+    <p>Consultez les dernières annonces administratives.</p>
+  </div>
+
+  <div class="card">
+    <h2>🧾 Suivi des demandes</h2>
+    <p>Historique et statut des démarches effectuées.</p>
+  </div>
+
+  <!-- ✅ Nouveaux ajouts liés à l'IA -->
+  <div class="card">
+    <h2>🧠 IA Éducative</h2>
+    <p>Utilisez une IA pédagogique pour vous guider dans vos révisions, sans triche.</p>
+  </div>
+
+  <div class="card">
+    <h2>🛡️ Vérification des Devoirs</h2>
+    <p>Soumettez vos devoirs et recevez un rapport d’authenticité anti-IA.
+    Détecteurs d’IA intégrés pour analyser les rapports ou devoirs soumis.
+Alerte automatique à l’administration si le contenu semble généré en majorité par une IA.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>📈Espace pour les clubs & encadrants</h2>
+    <p>Création d’activités, gestion des participants, validation des présences. Statistiques de participation pour chaque club.</p>
+  </div>
+</div>
+
+<footer>
+  © 2025 SmartCampus – EST Sidi Bennour
+</footer>
+
+</body>
+</html>

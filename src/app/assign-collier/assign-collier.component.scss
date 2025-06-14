@@ -1,0 +1,141 @@
+/* Layout principal */
+.layout {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f7fa;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, #43cea2, #185a9d); /* Dégradé vertical du violet foncé au lavande */
+  color: white;
+  padding: 20px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.sidebar-header .icon {
+  font-size: 32px;
+  margin-right: 12px;
+  background-color: #2980b9;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.sidebar-header .title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.sidebar-header .subtitle {
+  font-size: 14px;
+  color: #dcdcdc;
+  margin: 0;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar-nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.sidebar-nav a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-nav .logout {
+  margin-top: auto;
+  background-color: #e74c3c;
+  text-align: center;
+}
+
+.sidebar-nav .logout:hover {
+  background-color: #c0392b;
+}
+
+/* Contenu principal */
+.main-content {
+  flex: 1;
+  padding: 30px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-left: 20px;
+  color: #333;
+}
+
+.main-content h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+main div {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+select {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 5px;
+  transition: border-color 0.3s ease;
+}
+
+select:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+button {
+  padding: 12px 20px;
+  background-color: #3498db;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+button:disabled {
+  background-color: #7f8c8d;
+  cursor: not-allowed;
+}

@@ -1,0 +1,33 @@
+<h2>Enregistrement d'une association</h2>
+
+<div class="form-container">
+  <div class="form-group">
+    <label>Nom de l'association</label>
+    <input [(ngModel)]="nom" type="text" required>
+  </div>
+
+  <div class="form-group">
+    <label>Email</label>
+    <input [(ngModel)]="email" type="email" required>
+  </div>
+
+  <div class="form-group">
+    <label>Mot de passe</label>
+    <input [(ngModel)]="password" type="password" required>
+  </div>
+
+  <div class="form-group">
+    <label>Dossier Juridique (PDF)</label>
+    <input type="file" accept=".pdf" (change)="onFileSelected($event)">
+  </div>
+
+  <div class="form-group">
+    <label>Importer Membres (Excel)</label>
+    <input type="file" accept=".xlsx, .xls" (change)="onExcelSelected($event)">
+    <button type="button" class="small-button" (click)="downloadExcelTemplate()">📄 Télécharger modèle Excel vide</button>
+  </div>
+
+  <button type="button" class="submit-button" (click)="onRegister()">Enregistrer</button>
+
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+</div>

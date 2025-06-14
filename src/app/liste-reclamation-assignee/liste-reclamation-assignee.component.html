@@ -1,0 +1,62 @@
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h4>Admin</h4>
+  </div>
+  <nav>
+    <a (click)="home()"><i class="fas fa-home"></i> Accueil</a>
+    <a (click)="goToAddUser()"><i class="fas fa-user-plus"></i> Ajouter un utilisateur</a>
+    <a (click)="goToListUsers()"><i class="fas fa-users"></i> Liste des utilisateurs</a>
+    <a (click)="listreclamation()"><i class="fas fa-file-alt"></i> Liste des réclamations</a>
+    <a (click)="assignation()"><i class="fas fa-tasks"></i> Assignation</a>
+    <a (click)="listassignation()"><i class="fas fa-tasks"></i> Liste des Assignations</a>
+    <a (click)="logout()"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+  </nav>
+</aside>
+
+<!-- Main Container -->
+<div class="container">
+  <h2>Réclamations Assignées</h2>
+  
+  <div style="margin-bottom: 20px;">
+    <button class="btn btn-success" (click)="exportToExcel()">📥 Exporter en Excel</button>
+    <button class="btn btn-danger" (click)="exportToPDF()">📄 Exporter en PDF</button>
+  </div>
+  
+
+  <div *ngIf="reclamationsAssignees.length === 0">
+    Aucune réclamation assignée.
+  </div>
+
+  <table *ngIf="reclamationsAssignees.length > 0" class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Titre</th>
+        <th>Commune</th>
+        <th>Objectif</th>
+        <th>Agent Assigné</th>
+        <th>Email de provenance</th> <!-- 🆕 -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reclamation of reclamationsAssignees; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ reclamation.titre }}</td>
+        <td>{{ reclamation.commune?.nom }}</td>
+        <td>{{ reclamation.objectif }}</td>
+        <td>{{ reclamation.agentId?.email }}</td>
+        <td>
+          <!-- Vérifie si la réclamation vient d'une association ou d'un citoyen -->
+          <ng-container *ngIf="reclamation.associationId">
+            {{ reclamation.associationId.email }}
+          </ng-container>
+          <ng-container *ngIf="!reclamation.associationId && reclamation.citoyenId">
+            {{ reclamation.citoyenId.email }}
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+    
+  </table>
+</div>

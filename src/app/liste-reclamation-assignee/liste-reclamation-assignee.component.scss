@@ -1,0 +1,149 @@
+/* SIDEBAR */
+.sidebar {
+    width: 260px;
+    background: linear-gradient(180deg, #43cea2, #185a9d);
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    animation: slideInLeft 0.6s ease;
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  
+  .sidebar-header h4 {
+    margin: 0;
+    font-size: 1.7rem;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 10px;
+  }
+  
+  .sidebar nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar nav a {
+    cursor: pointer;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .sidebar nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
+  }
+  
+  /* MAIN CONTENT */
+  .container {
+    margin-left: 280px; /* Width of sidebar + padding */
+    padding: 2rem;
+  }
+  
+  .container h2 {
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+  }
+  
+  /* TABLE */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+  }
+  
+  .table thead {
+    background-color: #2c3e50;
+    color: white;
+  }
+  
+  .table th, .table td {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .table-striped tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+  
+  .table tbody tr:hover {
+    background-color: #e6f7ff;
+    cursor: pointer;
+  }
+  
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .sidebar {
+      position: static;
+      width: 100%;
+      height: auto;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+  
+    .sidebar nav {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+  
+    .container {
+      margin-left: 0;
+      padding: 1rem;
+    }
+  
+    .table thead {
+      display: none;
+    }
+  
+    .table tr {
+      display: block;
+      margin-bottom: 1rem;
+    }
+  
+    .table td {
+      display: block;
+      text-align: right;
+      position: relative;
+      padding-left: 50%;
+    }
+  
+    .table td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 1rem;
+      top: 0.75rem;
+      font-weight: bold;
+      text-align: left;
+    }
+  }
+  
+  /* ANIMATION */
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  

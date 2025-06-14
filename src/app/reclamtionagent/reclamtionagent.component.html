@@ -1,0 +1,113 @@
+<div class="sidebar">
+    <div class="sidebar-header">
+      <h4> Bonjour</h4>
+    </div>
+    <nav>
+      <ul>
+          <li (click)="home ()">
+            <i class="fas fa-home"></i> Accueil   
+          </li>
+          <li (click)="listreclamation()">
+            <i class="fas fa-home"></i>Voir les réclamations
+          </li>
+        <li (click)="logout()">
+          <i class="fas fa-sign-out-alt"></i> Déconnexion
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="container mt-4">
+    <h2 class="mb-4">📋 Réclamations Assignées</h2>
+  
+    <div *ngIf="reclamations.length === 0">
+      <div class="alert alert-info">Aucune réclamation assignée pour le moment.</div>
+    </div>
+  
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Titre</th>
+            <th>Objectif</th>
+            <th>Commune</th>
+            <th>Date d’envoi</th>
+            <th>Statut</th>
+            <th>Provenance</th>
+            <th> dossierJuridique</th>
+            <th>Fichier reclamtion </th>
+            <th> les membre de reclamtion </th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rec of reclamations">
+            <td>{{ rec.titre }}</td>
+            <td>{{ rec.objectif }}</td>
+            <td>{{ rec.commune?.nom }}</td>
+            <td>{{ rec.dateEnvoi | date: 'dd/MM/yyyy à HH:mm' }}</td>
+            <td>
+              <span class="badge"
+                [ngClass]="{
+                  'bg-secondary': rec.validationAgent === 'non défini',
+                  'bg-success': rec.validationAgent === 'acceptée',
+                  'bg-danger': rec.validationAgent === 'refusée'
+                }">
+                {{ rec.validationAgent }}
+              </span>
+              <div *ngIf="rec.validationAgent === 'refusée' && rec.motifRefus">
+                <small class="text-muted">Motif : {{ rec.motifRefus }}</small>
+              </div>
+            </td>
+            <td>
+              <div *ngIf="rec.associationId">
+                Association : {{ rec.associationId.email }}<br>
+                <ul *ngIf="rec.membres?.length">
+                  <li *ngFor="let m of rec.membres">{{ m.nom }} {{ m.prenom }} ({{ m.cin }})</li>
+                </ul>
+              </div>
+              <div *ngIf="!rec.associationId && rec.citoyenId">
+                Citoyen : {{rec.citoyenId.email }}
+              </div>
+            </td>
+            <td>
+              <div *ngIf="rec.associationId">
+                
+                <a [href]="'http://localhost:5000/' +rec.associationId.dossierJuridique" target="_blank">Télécharger</a>
+              </div>
+              <div *ngIf="!rec.associationId && rec.citoyenId">
+                -
+              </div>
+            </td>
+            <td>
+              <a [href]="'http://localhost:5000/uploads/' +rec.fichierPath" target="_blank">Télécharger</a>
+            </td>
+            <td>
+              <div *ngIf="rec.associationId">
+                <a [href]="'http://localhost:5000/uploads/' + rec.fichierMembresPath" target="_blank">
+                  Télécharger le fichier des membres
+                </a>
+              </div>
+              <div *ngIf="!rec.associationId && rec.citoyenId">
+                -
+              </div>
+            </td>            
+            <td>
+              <button class="btn btn-outline-success btn-sm me-1"
+                      [disabled]="rec.validationAgent !== 'non défini'"
+                      (click)="validerReclamation(rec._id)">
+                ✔ Valider
+              </button>
+              <button class="btn btn-outline-danger btn-sm"
+                      [disabled]="rec.validationAgent !== 'non défini'"
+                      (click)="refuserReclamation(rec._id)">
+                ✖ Refuser
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  
+

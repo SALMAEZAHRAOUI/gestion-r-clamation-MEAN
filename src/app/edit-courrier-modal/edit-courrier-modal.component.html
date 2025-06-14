@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Modifier le courrier</h2>
+<form (ngSubmit)="updateCourrier()">
+  <mat-form-field>
+    <mat-label>Sujet</mat-label>
+    <input matInput [(ngModel)]="courrier.sujet" name="sujet" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Historique</mat-label>
+    <textarea matInput [(ngModel)]="courrier.historique" name="historique" required></textarea>
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="close()">Annuler</button>
+    <button mat-button type="submit" color="primary">Modifier</button>
+  </div>
+</form>
+

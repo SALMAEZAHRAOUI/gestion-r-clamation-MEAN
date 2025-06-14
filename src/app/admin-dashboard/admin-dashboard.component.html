@@ -1,0 +1,85 @@
+<!-- Layout principal avec sidebar -->
+<div *ngIf="userRole === 'admin'" class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      
+      <div>
+        <h2 class="title">Admin</h2>
+        <p class="subtitle">{{ userEmail }}</p>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a (click)="home()">
+        <i class="fas fa-home"></i> Accueil
+      </a>
+      <a (click)="goToAddUser()">
+        <i class="fas fa-user-plus"></i> Ajouter un utilisateur
+      </a>
+      <a (click)="goToListUsers()">
+        <i class="fas fa-users"></i> Liste des utilisateurs
+      </a>
+      <a (click)="listreclamation()">
+        <i class="fas fa-file-alt"></i> Liste des réclamations
+      </a>
+      <a (click)="assignation()">
+        <i class="fas fa-tasks"></i> Assignation
+      </a>
+      <a (click)="listassignation()">
+        <i class="fas fa-tasks"></i> Liste des  Assignation
+      </a>
+      <a (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i> Se déconnecter
+      </a>
+    </nav>
+    
+  </aside>
+
+  <!-- Contenu principal -->
+  <main class="main-content">
+    <div class="box">
+      <h2>Bienvenue sur le tableau de bord Admin</h2>
+      <p>Vous avez un accès complet à toutes les fonctionnalités du système.</p>
+    </div>
+
+    <div class="dashboard-container" #dashboard>
+      <h2>Tableau de bord des réclamations</h2>
+
+      <!-- Cartes côte à côte -->
+      <div class="dashboard-cards">
+        <!-- Carte avec le graphique par type -->
+        <mat-card class="dashboard-card">
+          <h3>Réclamations par status</h3>
+          <canvas baseChart
+                  [data]="chartByTypeData"
+                  [options]="chartOptions"
+                  [type]="'bar'">
+          </canvas>
+        </mat-card>
+
+        <!-- Carte avec le graphique par date -->
+        <mat-card class="dashboard-card">
+          <h3>Réclamations par date</h3>
+          <canvas baseChart
+                  [data]="chartByDateData"
+                  [options]="chartOptions"
+                  [type]="'line'">
+          </canvas>
+        </mat-card>
+      </div>
+
+      <!-- Bouton d'export PDF avec icône et texte -->
+      <div class="export-button">
+        <button mat-raised-button (click)="exportToPDF()">
+          <mat-icon>picture_as_pdf</mat-icon> Exporter en PDF
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Message d'accès refusé -->
+  <div *ngIf="userRole !== 'admin'" class="unauthorized-message box danger-bg">
+    <p>🚫 Accès refusé : vous n'êtes pas autorisé à voir cette page.</p>
+  </div>
+</div>

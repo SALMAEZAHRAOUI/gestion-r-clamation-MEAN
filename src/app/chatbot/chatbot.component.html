@@ -1,0 +1,56 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h4>Menu</h4>
+  </div>
+  <nav>
+    <ul>
+      <li (click)="home()">
+        <i class="fas fa-home"></i> Accueil
+      </li>
+      <li (click)="EnvoyerReclamation()">
+        <i class="fas fa-paper-plane"></i> Envoyer une réclamation
+      </li>
+      <li (click)="chatbot()">
+        <i class="fas fa-comments"></i> Chatbot
+      </li>
+      <li (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i> Se déconnecter
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<div class="chat-container">
+  <div class="chat-header">Assistant Intelligent</div>
+
+  <div class="chat-box">
+    <div class="message bot-message">Bonjour, comment puis-je vous aider ?</div>
+
+    <div *ngFor="let msg of messages" [ngClass]="msg.sender === 'user' ? 'user-message' : 'bot-message'" class="message">
+      {{ msg.text }}
+        <!-- Affichage du lien PDF -->
+  
+    </div>
+    <div *ngIf="pdfUrl" class="bot-message">
+      <a [href]="pdfUrl" download="reclamation.pdf">
+        📄 Télécharger votre réclamation en PDF
+      </a>
+    </div>
+  
+
+    <!-- Indicateur de saisie -->
+    <div class="typing-indicator" *ngIf="isTyping">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <input type="text" [(ngModel)]="userInput" placeholder="Entrez votre message..." (keyup.enter)="sendMessage()" />
+    <button (click)="sendMessage()">Envoyer</button>
+    <!-- Bouton micro pour activer la reconnaissance vocale -->
+    <button mat-icon-button (click)="startVoiceRecognition()">
+      <mat-icon>{{ isListening ? 'mic_off' : 'mic' }}</mat-icon>
+    </button>
+    
+  </div>
+</div>

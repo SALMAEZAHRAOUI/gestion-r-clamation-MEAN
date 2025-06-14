@@ -1,0 +1,61 @@
+<div class="sidebar">
+    <div class="sidebar-header">
+      <h4>Menu</h4>
+    </div>
+    <nav>
+      <ul>
+        <li (click)="home()">
+          <i class="fas fa-home"></i> Accueil
+        </li>
+        <li (click)="envoyer()">
+          <i class="fas fa-paper-plane"></i> Envoyer une réclamation
+        </li>
+        <li (click)=" mesreclmation ()">
+            <i class="fas fa-paper-plane"></i>mes réclamation
+          </li>
+        <li (click)="chatbot()">
+          <i class="fas fa-comments"></i> Chatbot
+        </li>
+        <li (click)="logout()">
+          <i class="fas fa-sign-out-alt"></i> Se déconnecter  
+        </li>
+      </ul>
+    </nav>
+  </div>
+  
+  <div class="association-container">
+    <h2>Liste des Membres de l'Association</h2>
+  
+    <!-- Message d'erreur -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  
+    <!-- Tableau des membres -->
+    <div *ngIf="membres.length > 0" class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>CIN</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let membre of membres">
+            <td>{{ membre.cin }}</td>
+            <td>{{ membre.nom }}</td>
+            <td>{{ membre.prenom }}</td>
+            <td>{{ membre.role }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Aucun membre -->
+    <div *ngIf="membres.length === 0 && !errorMessage">
+      <p style="text-align: center; margin-top: 20px;">Aucun membre trouvé pour cette association.</p>
+    </div>
+  </div>
+  

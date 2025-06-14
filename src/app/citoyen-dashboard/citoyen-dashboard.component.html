@@ -1,0 +1,84 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+      
+    <h4>Menu</h4>
+  </div>
+  <nav>
+    <ul>
+      <li (click)="home()">
+        <i class="fas fa-home"></i> Accueil
+      </li>
+      <li (click)="EnvoyerReclamation()">
+        <i class="fas fa-paper-plane"></i> Envoyer une réclamation
+      </li>
+      
+      <li (click)="chatbot()">
+        <i class="fas fa-comments"></i> Chatbot
+      </li>
+      <li (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i> Se déconnecter
+      </li>
+    </ul>
+  </nav>
+  
+</div>
+
+<div class="main-content">
+  <div *ngIf="message; else showReclamations">
+    <p>{{ message }}</p>
+  </div>
+
+  <ng-template #showReclamations>
+    <div *ngIf="reclamations.length > 0; else noReclamations" class="table-container">
+      <table mat-table class="mat-elevation-z8">
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Objectif</th>
+            <th>Commune</th>
+            <th>Date d'envoi</th>
+            <th>Statut</th>
+            <th>Fichier</th>
+            <th>Motif du refus</th>
+            <th>Agent</th>
+            <th>Action</th>
+           
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reclamation of reclamations">
+            <td>{{ reclamation.titre }}</td>
+            <td>{{ reclamation.objectif }}</td>
+            <td>{{ reclamation.commune?.nom }}</td>
+            <td>{{ reclamation.dateEnvoi | date: 'short' }}</td>
+            <td>{{ reclamation.validationAgent }}</td>
+            <td>
+              <a [href]="'http://localhost:5000/uploads/' + reclamation.fichierPath" target="_blank">
+                Télécharger
+              </a>
+            </td>
+            
+            <td>
+              <span *ngIf="reclamation.validationAgent === 'refusée'">{{ reclamation.motifRefus }}</span>
+              <span *ngIf="reclamation.validationAgent !== 'refusée'">-</span>
+            </td>
+           
+            <td>{{ reclamation.agentId?.username }}<br><small>{{ reclamation.agentId?.email }}</small></td>
+            
+            <td>  <mat-card-actions>
+              <button mat-icon-button color="warn" (click)="supprimerReclamation(reclamation._id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-card-actions></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- ✅ Ce bloc doit être à l’intérieur de showReclamations -->
+    <ng-template #noReclamations>
+      <p>Aucune réclamation trouvée pour ce citoyen.</p>
+    </ng-template>
+  </ng-template>
+  
+

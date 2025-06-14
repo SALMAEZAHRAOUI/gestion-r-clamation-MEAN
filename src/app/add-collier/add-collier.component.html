@@ -1,0 +1,78 @@
+<!-- Layout principal avec sidebar -->
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="admin-icon"></div>
+      <div>
+        <h2>Admin</h2>
+        <p class="user-email">{{ userEmail }}</p>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a (click)="goToAddUser()">👤 Ajouter un utilisateur</a>
+      <a (click)="goToListUsers()">📋 Liste des utilisateurs</a>
+      <a (click)="goToaddcollier()">📦 Ajouter un  courrier</a>
+      <a (click)="goToassigncollier()">🔗 Assigner un  courrier</a>
+      <a (click)="goToListcollier()">📁 Liste des  courriers</a>
+      <a class="logout" (click)="logout()">🚪 Se déconnecter</a>
+    </nav>
+  </aside>
+
+  <!-- Contenu principal -->
+  <main class="main-content">
+    <div class="form-box">
+      <h2>Ajout d’un courrier</h2>
+      <div class="form-group">
+        <label for="sujet">Sujet :</label>
+        <input id="sujet" [(ngModel)]="sujet" type="text" required />
+      </div>
+
+      <hr />
+
+      <h3>Ajouter une étape</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Organisation :</label>
+          <input [(ngModel)]="organisation" type="text" />
+        </div>
+
+        <div class="form-group">
+          <label>Type :</label>
+          <select [(ngModel)]="type">
+            <option value="expédition">Expédition</option>
+            <option value="réception">Réception</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Numéro de référence :</label>
+          <input [(ngModel)]="numeroReference" type="text" />
+        </div>
+
+        <div class="form-group">
+          <label>Date :</label>
+          <input [(ngModel)]="date" type="date" />
+        </div>
+
+        <div class="form-actions">
+          <button class="btn primary" (click)="ajouterEtape()">+ Ajouter étape</button>
+        </div>
+      </div>
+
+      <hr />
+
+      <h3>Historique actuel</h3>
+      <ul class="history-list">
+        <li *ngFor="let h of historique">
+          {{ h.type }} par <strong>{{ h.organisation }}</strong> (Réf: {{ h.numeroReference }}, le {{ h.date }})
+        </li>
+      </ul>
+
+      <div class="form-actions">
+        <button class="btn success" (click)="enregistrer()">💾 Enregistrer le courrier</button>
+      </div>
+    </div>
+  </main>
+</div>
