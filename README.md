@@ -1,7 +1,8 @@
-# NomDuProjet
+# gestion des réclamations
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
-
+This project is a web application for managing citizen complaints, developed using the MEAN stack (MongoDB, Express.js, Angular, Node.js).
+It allows citizens to submit complaints, agents to process them, and the administrator to supervise the entire system.
 ## Development server
 
 To start a local development server, run:
