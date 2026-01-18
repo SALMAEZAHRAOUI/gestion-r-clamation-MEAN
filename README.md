@@ -70,3 +70,9 @@ Le projet repose sur une architecture **3-tiers** utilisant la pile **MEAN** :
     │   ├── modules/   # Admin, Agent, Citoyen
     │   ├── services/  # Communication API
     │   └── guards/    # Sécurité des routes
+
+### Comment l'ajouter à votre projet :
+1. Créez un nouveau fichier texte à la racine de votre dossier de projet.
+2. Nommez-le exactement `README.md`.
+3. Collez le code ci-dessus à l'intérieur.
+4. Enregistrez et faites un `git push` vers GitHub.
