@@ -3,7 +3,6 @@
 Cette plateforme est une solution numérique conçue pour moderniser la communication entre les citoyens, les associations et l'administration marocaine (Conseil Provincial). Elle permet une gestion transparente, sécurisée et efficace des réclamations.
 
 
-
 ## 🚀 Technologies Utilisées
 
 Le projet repose sur une architecture **3-tiers** utilisant la pile **MEAN** :
@@ -71,5 +70,3 @@ Le projet repose sur une architecture **3-tiers** utilisant la pile **MEAN** :
     │   ├── services/  # Communication API
     │   └── guards/    # Sécurité des routes
 
-## 📄 Rapport de Stage
-Vous pouvez consulter le rapport complet du projet ici : [Télécharger le PDF](.pfe.pdf)
