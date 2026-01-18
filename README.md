@@ -1,60 +1,72 @@
-# gestion des réclamations
+# 📋 Plateforme de Gestion des Réclamations (MEAN Stack)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
-This project is a web application for managing citizen complaints, developed using the MEAN stack (MongoDB, Express.js, Angular, Node.js).
-It allows citizens to submit complaints, agents to process them, and the administrator to supervise the entire system.
-## Development server
+Cette plateforme est une solution numérique conçue pour moderniser la communication entre les citoyens, les associations et l'administration marocaine (Conseil Provincial). Elle permet une gestion transparente, sécurisée et efficace des réclamations.
 
-To start a local development server, run:
 
-```bash
-ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🚀 Technologies Utilisées
 
-## Code scaffolding
+Le projet repose sur une architecture **3-tiers** utilisant la pile **MEAN** :
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+* **Frontend :** Angular 19.2.7 avec **Angular Material** pour l'interface, **Chart.js** pour les statistiques, et la **Web Speech API** pour la reconnaissance vocale.
+* **Backend :** Node.js avec **Express.js**.
+* **Base de données :** MongoDB avec l'ODM **Mongoose**.
+* **Sécurité :** Authentification basée sur les **JSON Web Tokens (JWT)**.
+* **Outils :** **Multer** (upload), **jsPDF** (génération de PDF), et **ExcelJS** (exports).
 
-```bash
-ng generate component component-name
-```
+## 👥 Rôles et Fonctionnalités
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 1. Citoyen
+* **Soumission :** Dépôt de réclamations avec description et pièces jointes.
+* **Suivi :** Tableau de bord pour consulter l'état des demandes en temps réel.
+* **Assistant Virtuel :** Chatbot avec reconnaissance vocale pour guider l'utilisateur.
 
-```bash
-ng generate --help
-```
+### 2. Association
+* **Gestion Collective :** Inscription avec dossier juridique.
+* **Membres :** Importation de la liste des membres via un fichier **Excel**.
 
-## Building
+### 3. Agent Administratif
+* **Traitement :** Validation ou refus motivé des réclamations assignées.
+* **Statistiques :** Visualisation des volumes de réclamations par catégorie via des graphiques.
 
-To build the project run:
+### 4. Administrateur
+* **Supervision :** Gestion complète des comptes et des rôles.
+* **Assignation :** Affectation des réclamations aux agents disponibles.
+* **Reporting :** Exportation de rapports globaux aux formats **Excel et PDF**.
 
-```bash
-ng build
-```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
+[Image of the MVC design pattern]
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
-```bash
-ng test
-```
+## ⚙️ Installation et Configuration
 
-## Running end-to-end tests
+### Prérequis
+* Node.js (v20+)
+* Angular CLI 19.2.7
+* MongoDB
 
-For end-to-end (e2e) testing, run:
+### Backend
+1. Naviguez vers le dossier : `cd backend`
+2. Installez les dépendances : `npm install`
+3. Configurez le fichier `.env` (MONGO_URI, JWT_SECRET)
+4. Lancez le serveur : `npm start`
 
-```bash
-ng e2e
-```
+### Frontend
+1. Naviguez vers le dossier : `cd frontend`
+2. Installez les dépendances : `npm install`
+3. Lancez l'application : `ng serve`
+4. Accédez à : `http://localhost:4200/`
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📊 Structure du Projet
+```text
+├── backend/
+│   ├── models/        # Schémas Mongoose
+│   ├── routes/        # Endpoints API
+│   ├── controllers/   # Logique métier
+│   └── uploads/       # Fichiers joints
+└── frontend/
+    ├── src/app/
+    │   ├── modules/   # Admin, Agent, Citoyen
+    │   ├── services/  # Communication API
+    │   └── guards/    # Sécurité des routes
